@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": false,
+    "declaration": true,
+    "allowJs": true,
+    "strict": true,
+    "paths": {
+      "*": ["node_modules/*"]
+    }
+  }
+}
