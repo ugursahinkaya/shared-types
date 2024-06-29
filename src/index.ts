@@ -72,7 +72,7 @@ export type Context<TBody = AnyRecord, TReturn = AnyRecord> = {
 } & AnyRecord;
 
 export type UserBase = {
-  phone: string;
+  userName: string;
   firstName: string;
   lastName: string;
 } & AnyRecord;
@@ -91,7 +91,7 @@ export interface SecureSocketOperations extends OperationsRecord {
   //@ts-expect-error
   socketError?: (reason: string) => void;
   //@ts-expect-error
-  login?: (phone: string, pass: string) => MaybePromise<void>;
+  login?: (userName: string, pass: string) => MaybePromise<void>;
   //@ts-expect-error
   logout?: () => MaybePromise<void>;
 }
