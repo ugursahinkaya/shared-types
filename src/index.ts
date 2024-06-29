@@ -169,3 +169,47 @@ export type Logger = {
 export type EventListener<T extends OperationsRecord, K extends keyof T> = (
   value: OperationsMap<T>[K][0]
 ) => OperationsMap<T>[K][1];
+
+export interface BotOptions<TOperationsRecord extends OperationsRecord> {
+  name: string;
+  socketUrl?: string;
+  authUrl?: string;
+  restApiPort?: number;
+  operations: TOperationsRecord;
+  operationBundles?: Record<string, string>;
+  middleware?: Middleware<OperationsMap<OperationsRecord>>[];
+  logLevels?: string[];
+  socketToken?: string;
+}
+export interface Rule {
+  id: number;
+  name?: string;
+  side?: string;
+  priority: number;
+  type: string;
+  operation: string;
+  kind: string;
+  protocol?: string;
+  role?: string;
+  domain?: string;
+  list?: boolean;
+  create?: boolean;
+  edit?: boolean;
+  delete?: boolean;
+}
+
+export interface User extends UserBase {
+  role?: string;
+}
+
+export interface UserGroup {
+  id: number;
+  name: string;
+}
+
+export interface OperationBundle {
+  id: number;
+  name: string;
+  bundlePath: string;
+  status: boolean;
+}
