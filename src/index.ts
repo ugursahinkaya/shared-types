@@ -3,6 +3,13 @@ export type AnyRecord = Record<string, any>;
 export type AnyOperation = Operation<any, any>;
 export type AnyFunction = (...args: any[]) => any;
 export type OperationsRecord = Record<string, AnyFunction>;
+export type LogMessage =
+  | string
+  | Record<string, any>
+  | any[]
+  | number
+  | boolean;
+export type LogLevel = "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 
 export type Middleware<TOperations extends Record<string, AnyOperation>> = (
   context: Context<TOperations[keyof TOperations]>,
@@ -117,7 +124,7 @@ export interface SecureSocketOptions<
   authUrl?: string;
   token?: string;
   operations?: TOperations;
-  logger?: { name: string; levels: string[] };
+  logLevel?: LogLevel;
 }
 
 export type AuthResponse = {
@@ -159,13 +166,6 @@ export type HttpPayload = {
     }
 );
 
-export type Logger = {
-  log: (message: string, ...params: unknown[]) => void;
-  warn: (message: string, ...params: unknown[]) => void;
-  error: (message: string, ...params: unknown[]) => void;
-  debug: (message: string, ...params: unknown[]) => void;
-};
-
 export type EventListener<T extends OperationsRecord, K extends keyof T> = (
   value: OperationsMap<T>[K][0]
 ) => OperationsMap<T>[K][1];
@@ -178,7 +178,7 @@ export interface BotOptions<TOperationsRecord extends OperationsRecord> {
   operations: TOperationsRecord;
   operationBundles?: Record<string, string>;
   middleware?: Middleware<OperationsMap<OperationsRecord>>[];
-  logLevels?: string[];
+  logLevel?: LogLevel;
   socketToken?: string;
 }
 export interface Rule {
