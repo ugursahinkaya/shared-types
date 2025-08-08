@@ -125,6 +125,7 @@ export interface SecureSocketOptions<
   token?: string;
   operations?: TOperations;
   logLevel?: LogLevel;
+  authInit?: boolean;
 }
 
 export type AuthResponse = {
